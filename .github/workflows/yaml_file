@@ -1,0 +1,28 @@
+name: Model Comparison
+on:
+  push:
+    branches:
+      - feature/quiz2
+
+jobs:
+  compare_models:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set Up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Train Models
+      run: python train_models.py
+
+    - name: Calculate Metrics
+      run: python calculate_metrics.py
+
